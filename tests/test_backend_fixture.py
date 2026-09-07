@@ -38,7 +38,7 @@ _CONFTEST = textwrap.dedent(
         *,
         backend: Backend,
         request: pytest.FixtureRequest,
-    ) -> Generator[None, None, None]:
+    ) -> Generator[None]:
         """Set a backend up, and log the steps."""
         _log(request=request, message=f"setup {backend.name}")
         yield
@@ -226,7 +226,7 @@ def test_setup_uses_other_fixtures(*, pytester: pytest.Pytester) -> None:
                 *,
                 backend: Backend,
                 request: pytest.FixtureRequest,
-            ) -> Generator[None, None, None]:
+            ) -> Generator[None]:
                 """Set the backend up with the value of another fixture."""
                 greeting = request.getfixturevalue(argname="greeting")
                 request.config.stash[GREETING_KEY] = f"{greeting} {backend.name}"
@@ -299,7 +299,7 @@ def test_shared_backend_names(*, pytester: pytest.Pytester) -> None:
                 *,
                 backend: Backend,
                 request: pytest.FixtureRequest,
-            ) -> Generator[None, None, None]:
+            ) -> Generator[None]:
                 """Set nothing up."""
                 del backend
                 del request

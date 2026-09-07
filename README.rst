@@ -54,7 +54,7 @@ Assign the fixture to a module-level name in a ``conftest.py`` for ``pytest`` to
         *,
         backend: Backend,
         request: pytest.FixtureRequest,
-    ) -> Generator[None, None, None]:
+    ) -> Generator[None]:
         """Set a backend up, yield while the test runs, then tear it down.
 
         Anything else the setup needs comes from

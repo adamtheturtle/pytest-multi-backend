@@ -3,6 +3,8 @@
 import pytest
 from beartype import beartype
 
+from pytest_multi_backend._options import option_values
+
 SKIP_MARKER_OPTION = "--skip-marker"
 
 
@@ -16,8 +18,9 @@ def skipped_marker_names(*, config: pytest.Config) -> frozenset[str]:
     Returns:
         Each value which was given to ``--skip-marker``.
     """
-    values: list[str] = config.getoption(name="skip_marker")
-    return frozenset(values)
+    return frozenset(
+        option_values(config=config, option_name=SKIP_MARKER_OPTION),
+    )
 
 
 @beartype

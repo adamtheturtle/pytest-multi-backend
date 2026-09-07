@@ -20,12 +20,13 @@ import pytest
 # ``pytest.fixture`` returns one of these, but ``pytest`` does not export
 # the type.
 # See https://github.com/pytest-dev/pytest/issues/14853.
-from _pytest.fixtures import (  # pylint: disable=import-private-name
-    FixtureFunctionDefinition,
-)
+from _pytest.fixtures import FixtureFunctionDefinition
 from beartype import beartype
 
+from pytest_multi_backend._options import option_values
+
 SKIP_BACKEND_OPTION = "--skip-backend"
+
 
 # Every backend which a fixture has been made for, keyed by the value
 # which ``--skip-backend`` takes for it. Fixtures are made when the
@@ -70,8 +71,9 @@ def skipped_backend_names(*, config: pytest.Config) -> frozenset[str]:
     Returns:
         Each value which was given to ``--skip-backend``.
     """
-    values: list[str] = config.getoption(name="skip_backend")
-    return frozenset(values)
+    return frozenset(
+        option_values(config=config, option_name=SKIP_BACKEND_OPTION),
+    )
 
 
 @beartype
@@ -92,7 +94,7 @@ def backend_fixture(
     *,
     name: str,
     backends: Sequence[Enum],
-    setup_for: Callable[..., Generator[None, None, None]],
+    setup_for: Callable[..., Generator[None]],
 ) -> FixtureFunctionDefinition:
     """Make a fixture which runs each test once per backend.
 
@@ -129,7 +131,7 @@ def backend_fixture(
     def _fixture(
         *,
         request: pytest.FixtureRequest,
-    ) -> Generator[Enum, None, None]:
+    ) -> Generator[Enum]:
         """Run a test against one backend.
 
         Yields:
