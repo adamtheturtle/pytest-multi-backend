@@ -43,6 +43,7 @@ jobs:
               --showlocals \
               --exitfirst \
               .
+        shell: bash
         env:
           UV_PYTHON: ${{ matrix.python-version }}
 
