@@ -234,7 +234,8 @@ def test_setup_uses_other_fixtures(*, pytester: pytest.Pytester) -> None:
             ) -> Generator[None]:
                 """Set the backend up with the value of another fixture."""
                 greeting = request.getfixturevalue(argname="greeting")
-                request.config.stash[GREETING_KEY] = f"{greeting} {backend.name}"
+                message = f"{greeting} {backend.name}"
+                request.config.stash[GREETING_KEY] = message
                 yield
 
 

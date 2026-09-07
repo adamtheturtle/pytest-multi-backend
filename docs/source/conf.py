@@ -69,6 +69,12 @@ intersphinx_mapping = {
     "pytest": ("https://docs.pytest.org/en/stable", None),
 }
 nitpicky = True
+# ``pytest`` does not export or document the type which
+# ``pytest.fixture`` returns.
+# See https://github.com/pytest-dev/pytest/issues/14853.
+nitpick_ignore = [
+    ("py:class", "_pytest.fixtures.FixtureFunctionDefinition"),
+]
 warning_is_error = True
 
 html_theme = "furo"

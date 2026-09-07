@@ -332,6 +332,7 @@ ignore_names = [
     "linkcheck_ignore",
     "linkcheck_retries",
     "master_doc",
+    "nitpick_ignore",
     "nitpicky",
     "project_copyright",
     "pygments_style",
