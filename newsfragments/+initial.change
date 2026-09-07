@@ -1,0 +1,1 @@
+Initial release: the ``backend_fixture`` factory and the ``--skip-backend`` and ``--skip-marker`` options.
