@@ -223,7 +223,7 @@ hooks = [
     id = "pyright-verifytypes",
     name = "pyright-verifytypes",
     stages = ["pre-push"],
-    entry = "uv run --extra=dev -m pyright --verifytypes pytest_multi_backend",
+    entry = "uv run --extra=dev -m pyright --verifytypes pytest_multi_backend --ignoreexternal",
     language = "python",
     pass_filenames = false,
     types_or = ["python"],

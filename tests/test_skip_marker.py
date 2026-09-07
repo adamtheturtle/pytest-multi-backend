@@ -96,7 +96,9 @@ def test_skip_unregistered_marker(*, pytester: pytest.Pytester) -> None:
     assert result.ret == pytest.ExitCode.USAGE_ERROR
     result.stderr.fnmatch_lines(
         lines2=[
-            "ERROR: --skip-marker was given the unregistered marker(s) slw. "
-            "Register markers in the 'markers' setting.",
+            (
+                "ERROR: --skip-marker was given the unregistered marker(s) "
+                "slw. Register markers in the 'markers' setting."
+            ),
         ],
     )

@@ -140,7 +140,8 @@ def backend_fixture(
         backend: Enum = request.param
         option_name = backend_option_name(backend=backend)
         if option_name in skipped_backend_names(config=request.config):
-            pytest.skip(reason=f"{SKIP_BACKEND_OPTION}={option_name} was given")
+            reason = f"{SKIP_BACKEND_OPTION}={option_name} was given"
+            pytest.skip(reason=reason)
 
         setup = functools.partial(setup_for, backend=backend, request=request)
         with contextlib.contextmanager(func=setup)():

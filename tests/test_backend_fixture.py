@@ -159,8 +159,10 @@ def test_skip_unknown_backend(*, pytester: pytest.Pytester) -> None:
     assert result.ret == pytest.ExitCode.USAGE_ERROR
     result.stderr.fnmatch_lines(
         lines2=[
-            "ERROR: --skip-backend was given the unknown backend(s) "
-            "nonexistent. Known backends: fake, real.",
+            (
+                "ERROR: --skip-backend was given the unknown backend(s) "
+                "nonexistent. Known backends: fake, real."
+            ),
         ],
     )
 
@@ -189,8 +191,11 @@ def test_skip_backend_without_fixtures(*, pytester: pytest.Pytester) -> None:
     assert result.ret == pytest.ExitCode.USAGE_ERROR
     result.stderr.fnmatch_lines(
         lines2=[
-            "ERROR: --skip-backend was given the unknown backend(s) real. "
-            "Known backends: none; no backend fixture has been made.",
+            (
+                "ERROR: --skip-backend was given the unknown backend(s) "
+                "real. Known backends: none; no backend fixture has been "
+                "made."
+            ),
         ],
     )
 
