@@ -124,4 +124,4 @@ See the `full documentation <https://adamtheturtle.github.io/pytest-multi-backen
    :target: https://github.com/adamtheturtle/pytest-multi-backend/actions
 .. |PyPI| image:: https://badge.fury.io/py/pytest-multi-backend.svg
     :target: https://badge.fury.io/py/pytest-multi-backend
-.. |minimum-python-version| replace:: 3.11
+.. |minimum-python-version| replace:: 3.12
