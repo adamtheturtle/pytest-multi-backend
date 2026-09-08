@@ -137,7 +137,7 @@ def backend_fixture(
         Yields:
             The backend which the test is running against.
         """
-        backend: Enum = request.param
+        backend: Enum = request.param  # ty: ignore[unsound-assignment]
         option_name = backend_option_name(backend=backend)
         if option_name in skipped_backend_names(config=request.config):
             reason = f"{SKIP_BACKEND_OPTION}={option_name} was given"
