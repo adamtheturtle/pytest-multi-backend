@@ -36,4 +36,5 @@ def option_values(*, config: pytest.Config, option_name: str) -> list[str]:
     if not _is_string_list(value=values):  # pragma: no cover
         message = f"pytest gave a non-list value for {option_name}: {values!r}"
         raise TypeError(message)
-    return values
+    typed_values: list[str] = values
+    return typed_values

@@ -82,8 +82,8 @@ def test_runs_once_per_backend(*, pytester: pytest.Pytester) -> None:
     test and torn down after it, and the backend's value is the ID
     which ``pytest`` shows.
     """
-    pytester.makeconftest(source=_CONFTEST)
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makeconftest(source=_CONFTEST)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest("--verbose")
 
@@ -109,8 +109,8 @@ def test_skip_backend(*, pytester: pytest.Pytester) -> None:
     """``--skip-backend`` skips, rather than deselects, the tests against
     the backend, and the backend is not set up for them.
     """
-    pytester.makeconftest(source=_CONFTEST)
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makeconftest(source=_CONFTEST)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest("--skip-backend=real", "--verbose", "-rs")
 
@@ -132,8 +132,8 @@ def test_skip_backend(*, pytester: pytest.Pytester) -> None:
 
 def test_skip_multiple_backends(*, pytester: pytest.Pytester) -> None:
     """``--skip-backend`` can be given once per backend to skip."""
-    pytester.makeconftest(source=_CONFTEST)
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makeconftest(source=_CONFTEST)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest(
         "--skip-backend=real",
@@ -151,8 +151,8 @@ def test_skip_unknown_backend(*, pytester: pytest.Pytester) -> None:
     This runs ``pytest`` in a subprocess so that the known backends
     are only those of this test's fixtures.
     """
-    pytester.makeconftest(source=_CONFTEST)
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makeconftest(source=_CONFTEST)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest_subprocess("--skip-backend=nonexistent")
 
@@ -174,7 +174,7 @@ def test_skip_backend_without_fixtures(*, pytester: pytest.Pytester) -> None:
     This runs ``pytest`` in a subprocess so that no other test's
     fixtures are known.
     """
-    pytester.makepyfile(
+    _ = pytester.makepyfile(
         test_example=textwrap.dedent(
             text='''\
             """A test which uses no backend."""
@@ -202,7 +202,7 @@ def test_skip_backend_without_fixtures(*, pytester: pytest.Pytester) -> None:
 
 def test_setup_uses_other_fixtures(*, pytester: pytest.Pytester) -> None:
     """The setup function can use other fixtures through ``request``."""
-    pytester.makeconftest(
+    _ = pytester.makeconftest(
         source=textwrap.dedent(
             text='''\
             """A backend fixture whose setup uses another fixture."""
@@ -249,7 +249,7 @@ def test_setup_uses_other_fixtures(*, pytester: pytest.Pytester) -> None:
             ''',
         ),
     )
-    pytester.makepyfile(
+    _ = pytester.makepyfile(
         test_example=textwrap.dedent(
             text='''\
             """A test which checks what the backend setup did."""
@@ -281,7 +281,7 @@ def test_shared_backend_names(*, pytester: pytest.Pytester) -> None:
     """A backend name given to ``--skip-backend`` skips that backend for
     every fixture which has a backend of that name.
     """
-    pytester.makeconftest(
+    _ = pytester.makeconftest(
         source=textwrap.dedent(
             text='''\
             """Two fixtures with a backend in common."""
@@ -326,7 +326,7 @@ def test_shared_backend_names(*, pytester: pytest.Pytester) -> None:
             ''',
         ),
     )
-    pytester.makepyfile(
+    _ = pytester.makepyfile(
         test_example=textwrap.dedent(
             text='''\
             """Tests which use each fixture."""

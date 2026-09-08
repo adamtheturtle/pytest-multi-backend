@@ -61,12 +61,12 @@ def _check_skipped_backends(*, config: pytest.Config) -> None:
     """
     registered_names = registered_backend_names()
     unknown_names = skipped_backend_names(config=config) - registered_names
-    if not unknown_names:
+    if len(unknown_names) == 0:
         return
 
     known_description = (
         ", ".join(sorted(registered_names))
-        if registered_names
+        if len(registered_names) > 0
         else "none; no backend fixture has been made"
     )
     message = (

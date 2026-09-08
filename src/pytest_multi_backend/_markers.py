@@ -61,7 +61,7 @@ def skip_marked_items(
     """
     skipped_markers = skipped_marker_names(config=config)
     unknown_markers = skipped_markers - registered_marker_names(config=config)
-    if unknown_markers:
+    if len(unknown_markers) > 0:
         message = (
             f"{SKIP_MARKER_OPTION} was given the unregistered marker(s) "
             f"{', '.join(sorted(unknown_markers))}. Register markers in "
