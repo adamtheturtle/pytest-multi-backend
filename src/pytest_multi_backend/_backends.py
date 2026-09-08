@@ -36,6 +36,11 @@ SKIP_BACKEND_OPTION = "--skip-backend"
 _REGISTERED_BACKENDS: dict[str, set[Enum]] = {}
 
 
+def _backend_parameter(*, value: Enum) -> Enum:
+    """Type a backend value supplied by the pytest parameter API."""
+    return value
+
+
 @beartype
 def backend_option_name(*, backend: Enum) -> str:
     """The value which ``--skip-backend`` takes to skip a backend.
@@ -137,7 +142,7 @@ def backend_fixture(
         Yields:
             The backend which the test is running against.
         """
-        backend: Enum = request.param  # ty: ignore[unsound-assignment]
+        backend = _backend_parameter(value=request.param)
         option_name = backend_option_name(backend=backend)
         if option_name in skipped_backend_names(config=request.config):
             reason = f"{SKIP_BACKEND_OPTION}={option_name} was given"
