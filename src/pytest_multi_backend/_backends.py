@@ -86,7 +86,7 @@ def _backend_ids(*, backends: Sequence[Enum]) -> list[str]:
     Returns:
         The ID to show for each given backend.
     """
-    return [str(object=backend.value) for backend in backends]
+    return [f"{backend.value!s}" for backend in backends]
 
 
 @beartype

@@ -31,7 +31,7 @@ def test_skip_marker(*, pytester: pytest.Pytester) -> None:
     """``--skip-marker`` skips, rather than deselects, each test which
     carries the marker.
     """
-    pytester.makeini(
+    _ = pytester.makeini(
         source=textwrap.dedent(
             text="""\
             [pytest]
@@ -40,7 +40,7 @@ def test_skip_marker(*, pytester: pytest.Pytester) -> None:
             """,
         ),
     )
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest("--skip-marker=slow", "--verbose", "-rs")
 
@@ -60,7 +60,7 @@ def test_marker_registered_with_arguments(
     pytester: pytest.Pytester,
 ) -> None:
     """A marker registered with an argument list is known by its name."""
-    pytester.makeini(
+    _ = pytester.makeini(
         source=textwrap.dedent(
             text="""\
             [pytest]
@@ -69,7 +69,7 @@ def test_marker_registered_with_arguments(
             """,
         ),
     )
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest("--skip-marker=slow")
 
@@ -80,7 +80,7 @@ def test_skip_unregistered_marker(*, pytester: pytest.Pytester) -> None:
     """Giving ``--skip-marker`` a marker which is not registered is an
     error, so that a mistyped marker does not silently skip nothing.
     """
-    pytester.makeini(
+    _ = pytester.makeini(
         source=textwrap.dedent(
             text="""\
             [pytest]
@@ -89,7 +89,7 @@ def test_skip_unregistered_marker(*, pytester: pytest.Pytester) -> None:
             """,
         ),
     )
-    pytester.makepyfile(test_example=_TEST_FILE)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
 
     result = pytester.runpytest("--skip-marker=slw", "--skip-marker=slow")
 
