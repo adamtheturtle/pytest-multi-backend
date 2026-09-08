@@ -35,7 +35,7 @@ def registered_marker_names(*, config: pytest.Config) -> frozenset[str]:
         whether in a configuration file or by a plugin. A registration
         looks like ``name: description`` or ``name(args): description``.
     """
-    lines: list[str] = config.getini(name="markers")  # ty: ignore[unsound-assignment]
+    lines = list[str](config.getini(name="markers"))
     names: set[str] = set()
     for line in lines:
         (name_and_args, _, _) = line.partition(":")
