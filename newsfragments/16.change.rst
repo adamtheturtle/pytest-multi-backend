@@ -1,0 +1,1 @@
+Express the registered repeatable-option type as an invariant rather than an unreachable coverage exclusion.
