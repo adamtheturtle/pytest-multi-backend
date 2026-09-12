@@ -36,6 +36,7 @@ SKIP_BACKEND_OPTION = "--skip-backend"
 _REGISTERED_BACKENDS: dict[str, set[Enum]] = {}
 
 
+@beartype
 def _backend_parameter(*, value: Enum) -> Enum:
     """Type a backend value supplied by the pytest parameter API."""
     return value
