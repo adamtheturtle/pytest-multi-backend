@@ -18,9 +18,9 @@ from enum import Enum
 import pytest
 
 # ``pytest.fixture`` returns this type, but ``pytest`` does not export it.
-# Replace this private import when pytest exposes a public type:
+# Remove this private import when pytest exposes a public type:
 # https://github.com/pytest-dev/pytest/issues/14853
-from _pytest.fixtures import FixtureFunctionDefinition
+from _pytest.fixtures import FixtureFunctionDefinition  # pylint: disable=import-private-name,useless-suppression
 from beartype import beartype
 
 from pytest_multi_backend._options import option_values
