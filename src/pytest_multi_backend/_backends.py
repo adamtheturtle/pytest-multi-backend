@@ -17,9 +17,9 @@ from enum import Enum
 
 import pytest
 
-# ``pytest.fixture`` returns one of these, but ``pytest`` does not export
-# the type.
-# See https://github.com/pytest-dev/pytest/issues/14853.
+# ``pytest.fixture`` returns this type, but ``pytest`` does not export it.
+# Replace this private import when pytest exposes a public type:
+# https://github.com/pytest-dev/pytest/issues/14853
 from _pytest.fixtures import FixtureFunctionDefinition
 from beartype import beartype
 
