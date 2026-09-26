@@ -271,7 +271,6 @@ MASTER.per-file-ignores = [
     "docs/source/conf.py:invalid-name",
     "docs/source/doccmd_*.py:invalid-name",
     "doccmd_README_rst_*.py:invalid-name",
-    "src/pytest_multi_backend/_backends.py:import-private-name",
 ]
 # Pickle collected data for later comparisons.
 MASTER.persistent = true
