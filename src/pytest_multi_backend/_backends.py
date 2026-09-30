@@ -20,9 +20,7 @@ import pytest
 # ``pytest.fixture`` returns this type, but ``pytest`` does not export it.
 # Remove this private import when pytest exposes a public type:
 # https://github.com/pytest-dev/pytest/issues/14853
-# The private import check depends on file order for annotations:
-# https://github.com/pylint-dev/pylint/issues/11466
-from _pytest.fixtures import FixtureFunctionDefinition  # pylint: disable=import-private-name,useless-suppression
+from _pytest.fixtures import FixtureFunctionDefinition
 from beartype import beartype
 
 from pytest_multi_backend._options import option_values
