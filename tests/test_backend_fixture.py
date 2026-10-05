@@ -27,9 +27,9 @@ _CONFTEST = textwrap.dedent(
         FAKE = "In memory fake"
 
 
-    def _log(*, request: pytest.FixtureRequest, message: str) -> None:
+    def _log(*, message: str) -> None:
         """Append a line to the log file in the test directory."""
-        log = Path(request.config.rootpath) / "log.txt"
+        log = Path(__file__).resolve().parent / "log.txt"
         with log.open(mode="a", encoding="utf-8") as log_file:
             log_file.write(message + "\\n")
 
@@ -40,9 +40,10 @@ _CONFTEST = textwrap.dedent(
         request: pytest.FixtureRequest,
     ) -> Generator[None]:
         """Set a backend up, and log the steps."""
-        _log(request=request, message=f"setup {backend.name}")
+        del request
+        _log(message=f"setup {backend.name}")
         yield
-        _log(request=request, message=f"teardown {backend.name}")
+        _log(message=f"teardown {backend.name}")
 
 
     fixture_backend = backend_fixture(
@@ -60,15 +61,12 @@ _TEST_FILE = textwrap.dedent(
     from enum import Enum
     from pathlib import Path
 
-    import pytest
-
 
     def test_backend(
         backend: Enum,
-        request: pytest.FixtureRequest,
     ) -> None:
         """Log the backend which the test is running against."""
-        log = Path(request.config.rootpath) / "log.txt"
+        log = Path(__file__).resolve().parent / "log.txt"
         with log.open(mode="a", encoding="utf-8") as log_file:
             log_file.write(f"test {backend.name}\\n")
     ''',
