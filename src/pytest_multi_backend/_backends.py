@@ -83,16 +83,16 @@ def skipped_backend_names(*, config: pytest.Config) -> frozenset[str]:
 
 
 @beartype
-def _backend_ids(*, backends: Sequence[Enum]) -> list[str]:
-    """The IDs which ``pytest`` shows for a set of backends.
+def _backend_id(backend: Enum, /) -> str:
+    """Return the ID which ``pytest`` shows for a backend.
 
     Args:
-        backends: The backends to give IDs for.
+        backend: The backend to give an ID for.
 
     Returns:
-        The ID to show for each given backend.
+        The ID to show for the given backend.
     """
-    return [f"{backend.value!s}" for backend in backends]
+    return f"{backend.value!s}"
 
 
 @beartype
@@ -132,7 +132,7 @@ def backend_fixture(
     @pytest.fixture(
         name=name,
         params=backends,
-        ids=_backend_ids(backends=backends),
+        ids=_backend_id,
     )
     def _fixture(
         *,
