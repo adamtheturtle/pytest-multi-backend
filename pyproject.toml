@@ -35,7 +35,7 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "beartype>=0.22.9",
+    "beartype>=0.23.0",
     # ``pytest.fixture`` returns a ``FixtureFunctionDefinition`` from
     # 8.4.0, and ``backend_fixture`` returns one of those.
     "pytest>=8.4.0",
@@ -47,7 +47,7 @@ entry-points.pytest11.pytest_multi_backend = "pytest_multi_backend.plugin"
 [dependency-groups]
 dev = [
     "actionlint-py==1.7.12.25",
-    "beartype==0.23.0rc2",
+    "beartype==0.23.0",
     "check-manifest==0.51",
     "check-wheel-contents==0.6.3",
     "coverage==7.16.2",
