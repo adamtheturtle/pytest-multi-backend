@@ -48,7 +48,7 @@ entry-points.pytest11.pytest_multi_backend = "pytest_multi_backend.plugin"
 [dependency-groups]
 dev = [
     "actionlint-py==1.7.12.25",
-    "beartype==0.23.0",
+    "beartype==0.23.1",
     "check-manifest==0.51",
     "check-wheel-contents==0.6.3",
     "coverage==7.16.2",
