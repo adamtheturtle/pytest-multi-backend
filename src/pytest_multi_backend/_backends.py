@@ -14,6 +14,7 @@ import contextlib
 import functools
 from collections.abc import Callable, Generator, Sequence
 from enum import Enum
+from typing import Protocol, runtime_checkable
 
 import pytest
 
@@ -34,6 +35,16 @@ SKIP_BACKEND_OPTION = "--skip-backend"
 # collection finishes, so this is complete by the time the option is
 # checked against it.
 _REGISTERED_BACKENDS: dict[str, set[Enum]] = {}
+
+
+@runtime_checkable
+class _BackendValue(Protocol):
+    """A backend's value can be any Python object."""
+
+    @property
+    def value(self) -> object:
+        """The value used to produce the backend's test ID."""
+        ...
 
 
 @beartype
@@ -83,7 +94,7 @@ def skipped_backend_names(*, config: pytest.Config) -> frozenset[str]:
 
 
 @beartype
-def _backend_id(backend: Enum, /) -> str:
+def _backend_id(backend: _BackendValue, /) -> str:
     """Return the ID which ``pytest`` shows for a backend.
 
     Args:

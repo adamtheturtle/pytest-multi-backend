@@ -103,6 +103,25 @@ def test_runs_once_per_backend(*, pytester: pytest.Pytester) -> None:
     ]
 
 
+def test_non_string_backend_ids(*, pytester: pytest.Pytester) -> None:
+    """Backend IDs preserve the string representations of arbitrary values."""
+    source = _CONFTEST.replace(
+        'REAL = "Real service"',
+        "REAL = 42",
+    ).replace(
+        'FAKE = "In memory fake"',
+        'FAKE = ("in memory", "fake")',
+    )
+    _ = pytester.makeconftest(source=source)
+    _ = pytester.makepyfile(test_example=_TEST_FILE)
+
+    result = pytester.runpytest("--verbose")
+
+    result.assert_outcomes(passed=2)
+    assert "test_backend[42] PASSED" in result.stdout.str()
+    assert "test_backend[('in memory', 'fake')] PASSED" in result.stdout.str()
+
+
 def test_skip_backend(*, pytester: pytest.Pytester) -> None:
     """``--skip-backend`` skips, rather than deselects, the tests against
     the backend, and the backend is not set up for them.

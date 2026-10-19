@@ -88,7 +88,7 @@ A test which requests the fixture runs once per backend, and gets the backend it
 
     def test_something(backend: Enum) -> None:
         """Assert the same thing about every backend."""
-        assert backend.value
+        assert backend.name in {"REAL", "FAKE"}
 
 Skipping backends
 ~~~~~~~~~~~~~~~~~
