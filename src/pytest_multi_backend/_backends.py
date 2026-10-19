@@ -92,7 +92,8 @@ def _backend_id(backend: Enum, /) -> str:
     Returns:
         The ID to show for the given backend.
     """
-    return f"{backend.value!s}"
+    # Enum values may have any type; IDs use their string representation.
+    return f"{backend.value!s}"  # pyrefly: ignore[unknown-attribute-access]
 
 
 @beartype

@@ -68,7 +68,7 @@ A test which requests the fixture runs once per backend, and gets the backend it
 
     def test_something(backend: Enum) -> None:
         """Assert the same thing about every backend."""
-        assert backend.value
+        assert backend.name in {"REAL", "FAKE"}
 
 Several fixtures can share an :class:`~enum.Enum`.
 A suite might have one fixture for every backend, used by tests which verify a fake against the real service, and another for the fakes alone, used by tests which need to control the state of the service.
