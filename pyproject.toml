@@ -385,6 +385,7 @@ search_path = [
     "src",
 ]
 errors.non-exhaustive-match = "error"
+coverage.includes = [ "src/**" ]
 enabled-ignores = [ "pyrefly" ]
 preset = "all"
 
