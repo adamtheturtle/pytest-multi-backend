@@ -10,7 +10,6 @@ Run one ``pytest`` suite against several interchangeable backends.
 
 A "backend" is one way of running the system which the tests exercise.
 A suite might run against a real remote service, an in-memory fake of that service, and the same fake behind an HTTP server, and assert the same things about each.
-That is how a fake is kept honest.
 
 Installation
 ------------
@@ -100,14 +99,14 @@ Give it once per backend to skip.
 
    $ pytest --skip-backend=real
 
-Tests against a skipped backend are skipped, not deselected, so a run which skips a backend still reports the tests which would have used it.
+Tests against that backend still appear in the report with a skipped outcome.
 The setup function is not called for a skipped backend.
 Giving a name which no fixture has a backend for is an error, so a mistyped name does not silently run tests against a backend you meant to avoid.
 
 Skipping marked tests
 ~~~~~~~~~~~~~~~~~~~~~
 
-Give ``--skip-marker`` the name of a registered marker to skip every test which carries it.
+Give ``--skip-marker`` the name of a registered marker to skip tests with that marker.
 Give it once per marker to skip.
 
 .. code-block:: console
