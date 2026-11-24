@@ -3,7 +3,7 @@
 import pytest
 from beartype import beartype
 
-from pytest_multi_backend._options import option_values
+from pytest_multi_backend._options import option_strings, option_values
 
 SKIP_MARKER_OPTION = "--skip-marker"
 
@@ -35,7 +35,8 @@ def registered_marker_names(*, config: pytest.Config) -> frozenset[str]:
         whether in a configuration file or by a plugin. A registration
         looks like ``name: description`` or ``name(args): description``.
     """
-    lines = list[str](config.getini(name="markers"))
+    marker_lines: object = config.getini(name="markers")
+    lines = option_strings(value=marker_lines)
     names: set[str] = set()
     for line in lines:
         (name_and_args, _, _) = line.partition(":")

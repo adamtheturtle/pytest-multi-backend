@@ -59,7 +59,8 @@ Assign the fixture to a module-level name in a ``conftest.py`` for ``pytest`` to
         Anything else the setup needs comes from
         ``request.getfixturevalue``.
         """
-        monkeypatch = request.getfixturevalue(argname="monkeypatch")
+        monkeypatch: object = request.getfixturevalue(argname="monkeypatch")
+        assert isinstance(monkeypatch, pytest.MonkeyPatch)
         if backend is Backend.FAKE:
             # Start the fake here, and point the code under test at it.
             monkeypatch.setenv(name="SERVICE_URL", value="http://localhost:8080")
