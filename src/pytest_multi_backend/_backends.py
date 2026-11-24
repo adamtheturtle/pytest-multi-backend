@@ -12,7 +12,7 @@ it, and the member value gives the ID which ``pytest`` shows for it.
 
 import contextlib
 import functools
-from collections.abc import Callable, Generator, Sequence
+from collections.abc import Callable, Generator, Mapping, Sequence
 from enum import Enum
 from typing import Protocol, runtime_checkable
 
@@ -48,8 +48,11 @@ class _BackendValue(Protocol):
 
 
 @beartype
-def _backend_parameter(*, value: Enum) -> Enum:
-    """Type a backend value supplied by the pytest parameter API."""
+def _backend_parameter(*, value: object) -> Enum:
+    """Validate a backend value supplied by the pytest parameter API."""
+    if not isinstance(value, Enum):
+        msg = "Expected an enum member as a backend parameter"
+        raise TypeError(msg)
     return value
 
 
@@ -154,7 +157,8 @@ def backend_fixture(
         Yields:
             The backend which the test is running against.
         """
-        backend = _backend_parameter(value=request.param)
+        parameters: Mapping[str, object] = vars(request)
+        backend = _backend_parameter(value=parameters["param"])
         option_name = backend_option_name(backend=backend)
         if option_name in skipped_backend_names(config=request.config):
             reason = f"{SKIP_BACKEND_OPTION}={option_name} was given"

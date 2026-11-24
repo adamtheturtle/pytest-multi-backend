@@ -26,7 +26,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     group.addoption(
         SKIP_BACKEND_OPTION,
         action="append",
-        default=[],
+        default=None,
         dest="skip_backend",
         metavar="BACKEND",
         help=(
@@ -37,7 +37,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     group.addoption(
         SKIP_MARKER_OPTION,
         action="append",
-        default=[],
+        default=None,
         dest="skip_marker",
         metavar="MARKER",
         help=(
