@@ -386,3 +386,25 @@ def test_help(*, pytester: pytest.Pytester) -> None:
             "*--skip-marker=MARKER*",
         ],
     )
+
+
+def test_invalid_indirect_backend(*, pytester: pytest.Pytester) -> None:
+    """Reject an indirect parameter that is not a backend enum member."""
+    _ = pytester.makeconftest(source=_CONFTEST)
+    _ = pytester.makepyfile(
+        test_invalid=textwrap.dedent(
+            text="""\
+            import pytest
+
+            @pytest.mark.parametrize("backend", ["invalid"], indirect=True)
+            def test_backend(backend):
+                pass
+            """
+        )
+    )
+    result = pytester.runpytest()
+    result.assert_outcomes(errors=1)
+    result.stdout.fnmatch_lines(
+        lines2=["*Expected an enum member as a backend parameter*"],
+    )
+    assert not (pytester.path / "log.txt").exists()
